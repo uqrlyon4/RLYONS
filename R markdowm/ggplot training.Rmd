@@ -2,10 +2,41 @@
 title: "Graphics with ggplot tutorial"
 author: "Rebecca Lyons"
 date: "04/04/2020"
-output: html_document
+output:
+  word_document: default
+  html_document: default
 ---
 
 #Learning ggplot2
 We're learning ggplot2. Its going to be amazing.
 *italics*
 _bold_
+## from CRAN:
+install.packages("tidyversë") #do this once
+library (tidyverse) #do this every time.
+
+#National Parks in California
+ca <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/ca.csv") 
+
+#Acadia National Park
+acadia <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/acadia.csv")
+
+#Southeast US National Parks
+se <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/se.csv")
+
+#2016 Visitation for all Pacific West National Parks
+visit_16 <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/visit_16.csv")
+
+#All Nationally designated sites in Massachusetts
+mass <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/mass.csv")
+read.csv
+```r
+
+head(ca)
+view(pw)
+view(ca)
+ggplot(data=ca)
+ggplot(data=ca) 
++ geom_point(aes(x=year, y=visitors))
+ggplot(data=ca) + geom_point(aes(x=year, y=visitors))
+> 
