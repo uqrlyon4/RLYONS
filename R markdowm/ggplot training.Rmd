@@ -39,4 +39,8 @@ ggplot(data=ca)
 ggplot(data=ca) 
 + geom_point(aes(x=year, y=visitors))
 ggplot(data=ca) + geom_point(aes(x=year, y=visitors))
-> 
+ggplot (data=ca)+geom_point(aes(x=year, y=visitors, color=park_name))
+```{r national park}
+ggplot (data=ca)+geom_point(aes(x=year, y=visitors, color=park_name))
+```
+
