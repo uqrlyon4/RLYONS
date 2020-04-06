@@ -1,0 +1,43 @@
+---
+title: "Gapminder2"
+author: "Rebecca Lyons"
+date: "06/04/2020"
+output: html_document
+---
+
+Seeing if I can improve the R markdown output
+
+Lets load some data, we'll use the BLAST output from Rob
+```{r}
+Random<-readr::read_csv("C:/Users/tommy/Documents/rebecca/Coding training/random table for practice.csv")
+head(Random)
+ggplot(data=Random)
+ggplot(data=Random)+geom_point(aes(x=Person, y=Height))
+#Code from Tom
+dev.new() ; plot(Random$Height , xlab = 'ghsdfj')
+dev.new() ; barplot(Random$Height , xlab = 'ghsdfj')
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I'm going to try to do a barchart now
+```{r}
+ggplot(RobBLAST)+geom_bar(aes(y=Height))
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
