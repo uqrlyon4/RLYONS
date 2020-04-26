@@ -1,0 +1,71 @@
+---
+title: "Chap 7 tutorial"
+author: "Rebecca Lyons"
+date: "26/04/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+library(tidyverse)
+gap_wide<-readr::read_csv('https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder_wide.csv')
+gapminder <- readr::read_csv('https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder.csv')
+gap_long <- gap_wide %>% 
+  gather(key   = obstype_year,
+         value = obs_values)
+#Gather all the columns starting with pop, all the columns starting with lifeexp and all columns starting with gdPerCap and put each inot a single column. So many columns into 3 columns. Leave country and continent columns. 
+gap_long1 <- gap_wide %>% 
+  gather(key   = obstype_year,
+         value = obs_values,
+         dplyr::starts_with('pop'),
+         dplyr::starts_with('lifeExp'),
+         dplyr::starts_with('gdpPercap'))  #here i'm listing all the columns to use in gather
+#Now we get rid of the country and continent columns then we separate out obstype (pop, life exp etc) and year into 2 columns
+
+#Plot Canada's life expectancy
+
+canada_df <- gap_long %>%
+  filter(obs_type == "lifeExp",
+         country == "Canada")
+
+ggplot(canada_df, aes(x = year, y = obs_values)) +
+  geom_line()
+```
+```{r}
+life_df <- gap_long %>%
+  filter(obs_type == "lifeExp",
+         continent == "Americas")
+
+ggplot(life_df, aes(x = year, y = obs_values, color = country)) +
+  geom_line()
+
+#Group by continents
+continents <- gap_long %>% 
+  filter(obs_type == "lifeExp", 
+         year > 1980) %>% 
+  group_by(continent, year) %>% 
+  summarize(mean_le = mean(obs_values)) %>%
+  ungroup()
+ggplot(data = continents, aes(x = year, y = mean_le, color = continent)) + 
+  geom_line() +
+  labs(title = "Mean life expectancy",
+       x = "Year",
+       y = "Age (years)") 
+
+
+#spread to change dataformat back to normal
+gap_normal <- gap_long %>% 
+  spread(obs_type, obs_values)
+
+View(gap_wide_new)
+```
+#
